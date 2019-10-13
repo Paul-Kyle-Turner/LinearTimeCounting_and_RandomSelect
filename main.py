@@ -106,7 +106,7 @@ a[i]'''
         time = timeit.repeat(setup=SETUP_CODE.replace('a_size', str(i)),
                              stmt=TEST_CODE,
                              number=100,
-                             repeat=5)
+                             repeat=10)
         times.append(statistics.mean(time))
     with open(file, "w+") as file:
         for t in times:
@@ -133,7 +133,7 @@ a[i]'''
         time = timeit.repeat(setup=SETUP_CODE.replace('a_size', str(i)),
                              stmt=TEST_CODE,
                              number=100,
-                             repeat=5)
+                             repeat=10)
         times.append(statistics.mean(time))
     with open(file, "w+") as file:
         for t in times:
@@ -156,7 +156,7 @@ a[i]'''
         time = timeit.repeat(setup=SETUP_CODE.replace('a_size', str(i)),
                              stmt=TEST_CODE,
                              number=100,
-                             repeat=5)
+                             repeat=10)
         times.append(statistics.mean(time))
     with open(file, "w+") as file:
         for t in times:
@@ -180,7 +180,7 @@ iterative_random_select(ar, i)'''
         time = timeit.repeat(setup=SETUP_CODE.replace('a_size', str(i)),
                              stmt=TEST_CODE,
                              number=100,
-                             repeat=5)
+                             repeat=10)
         times.append(statistics.mean(time))
     with open(file, "w+") as file:
         for t in times:
@@ -206,7 +206,7 @@ random_select(ar, p, r, i)'''
         time = timeit.repeat(setup=SETUP_CODE.replace('a_size', str(i)),
                              stmt=TEST_CODE,
                              number=100,
-                             repeat=5)
+                             repeat=10)
         times.append(statistics.mean(time))
     with open(file, "w+") as file:
         for t in times:
@@ -215,38 +215,30 @@ random_select(ar, p, r, i)'''
 
 
 if __name__ == '__main__':
-    # a = [2, 4, 5, 6, 7, 8, 1, 10]
-    # print(random_select(ar=a, p=0, r=len(a)-1, i=4))
-    # print(iterative_random_select(a, 4))
-    # print(insertion_sort(a))
-    # sort_select
-    # quick
-    # counting
-
-    starts = 10
-    stops = 10000
-    bys = 10
+    starts = 100
+    stops = 50000
+    bys = 100
     print("Start")
-    sort_select_insertion_times = insertion_sort_select_time(starts, stops, bys, 'sort_select_insertion.txt')
-    print("complete insertion")
-    sort_select_quick_times = quick_sort_select_time(starts, stops, bys, 'sort_select_quick.txt')
-    print("complete quick")
-    # sort_select_counting_times = counting_sort_select_time(starts, stops, bys, 'sort_select_counting.txt')
-    # print("complete counting")
+    #sort_select_insertion_times = insertion_sort_select_time(starts, stops, bys, 'sort_select_insertion.txt')
+    #print("complete insertion")
+    #sort_select_quick_times = quick_sort_select_time(starts, stops, bys, 'sort_select_quick.txt')
+    #print("complete quick")
+    #sort_select_counting_times = counting_sort_select_time(starts, stops, bys, 'sort_select_counting.txt')
+    #print("complete counting")
     iterative_random_select_times = iterative_random_select_time(starts, stops, bys, 'iterative_random_select.txt')
     print("complete iterative random")
     random_select_times = random_select_time(starts, stops, bys, 'random_select.txt')
     print("complete random")
 
     data = pd.DataFrame({'x': range(starts, stops, bys),
-                         'insertion_sort_select': sort_select_insertion_times,
-                         'quick_sort_select': sort_select_quick_times,
-                         # 'counting_sort_select': sort_select_counting_times,
+                         #'insertion_sort_select': sort_select_insertion_times,
+                         #'quick_sort_select': sort_select_quick_times,
+                         #'counting_sort_select': sort_select_counting_times,
                          'iterative_random_select': iterative_random_select_times,
                          'random_select': random_select_times})
-    plt.plot('x', 'insertion_sort_select', data=data)
-    plt.plot('x', 'quick_sort_select', data=data)
-    # plt.plot('x', 'counting_sort_select', data=data)
+    #plt.plot('x', 'insertion_sort_select', data=data)
+    #plt.plot('x', 'quick_sort_select', data=data)
+    #plt.plot('x', 'counting_sort_select', data=data)
     plt.plot('x', 'iterative_random_select', data=data)
     plt.plot('x', 'random_select', data=data)
     plt.legend()
